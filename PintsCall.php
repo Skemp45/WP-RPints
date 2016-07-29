@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Raspberry Pints Tap Access
+ * Plugin Name: RaspberryPints Tap Access
  * Description: This plugin will use your API Key and Secret to pull in your active taplist onto your website.
  * Version: 1.0
  * Author: Six Pack Apps
@@ -31,6 +31,45 @@ define( 'WPRPINTS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
 // Blocks direct access to plugin
 defined( 'ABSPATH' ) or die( "Access Forbidden" );
+
+//Build out Admin UI
+add_action('admin_menu', 'WPRP_menu');
+
+ // add_menu_page( string $page_title, string $menu_title, string $capability, string $menu_slug, callable $function = '', string $icon_url = '', int $position = null
+
+//Set Menu Settings
+function WPRP_menu(){
+        add_menu_page(
+            'WP RPints Admin Page',
+            'WPRP Admin',
+            'manage_options',
+            'wprp-admin',
+            'wprp_init',
+            'dashicons-editor-table' );
+}
+
+//Create Display Inside admin section
+function wprp_init(){
+
+  //set navigation
+  echo "<h2 class='nav-tab-wrapper'><a class='nav-tab nav-tab-active' id='api-tab' href='#top#api'>API Settings</a><a class='nav-tab nav-tab-disabled' id='other-tab' href='#top#other'>Other</a></h2>";
+
+  //Page Description
+  echo "<p style='font-size:120%; width:60%;'>
+  This is where you will need to set your API Key and Secrect so that when you implement the short code into your website it can make the proper API calls in order to display your active Taplist.
+  </p>";
+
+  //Content divs
+  echo"<div id='api'>
+          <label><b>API Key:</b></label><br/>
+              <input type='text' name='apiKey' /><br/>
+          <label><b>API Secret:</b></label><br/>
+              <input type='text' name='apiSecret' /><br/><br/>
+              <button class='button button-primary'>Submit</button>
+      </div>";
+  echo"<div id='other'></div>";
+
+    }
 
 // [rpints] Code
 function validationCall( $creds, $content = null ) {
