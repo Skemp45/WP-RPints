@@ -41,9 +41,9 @@ function validationCall( $creds, $content = null ) {
 			'Page' => ''
 		), $creds );
 
-	$RP_script_url = 'http://raspberrypints.com/' . $RP['Page'] . '/?'. $RP['API_KEY']  .': '. $RP['API_Secret']  .'';
+	$RP_Taplist_url = 'http://raspberrypints.com/' . $RP['Page'] . '/?'. $RP['API_KEY']  .': '. $RP['API_Secret']  .'';
 
-	return "<iframe style='width: 100%; height: 1000px; border: none; outline: none;' src='' width='300' height='150'></iframe>";
+	return "<iframe style='width: 100%; height: 1000px; border: none; outline: none;' src=''. $RP_Taplist_url .'' width='300' height='150'></iframe>";
 
 }
 add_shortcode( 'RPints', 'validationCall' );
