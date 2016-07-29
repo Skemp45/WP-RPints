@@ -23,27 +23,28 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 **************************************************************************/
-
-// Blocks direct access to plugin
-defined( 'ABSPATH' ) or die( "Access Forbidden" );
-
 // Define WP RPints Plugin
 define( 'WPRPINTS_PLUGIN_VERSION', '1.0' );
 define( 'WPRPINTS_PLUGIN__MINIMUM_WP_VERSION', '4.5' );
 define( 'WPRPINTS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPRPINTS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-// [RPints] Code
+// Blocks direct access to plugin
+defined( 'ABSPATH' ) or die( "Access Forbidden" );
+
+// [rpints] Code
 function validationCall( $creds, $content = null ) {
 	$RP = shortcode_atts( array (
-			'API_KEY' => '',
-			'API_Secret' => '',
-			'Page' => ''
+			'api_key' => '',
+			'api_secret' => '',
+			'page' => ''
 		), $creds );
 
-	$RP_Taplist_url = "http://raspberrypints.com/" . $RP['Page'] . "/?". $RP['API_KEY'] .":". $RP['API_Secret'];
+    //Building Validation URL
+    $RP_Taplist_url = "http://raspberrypints.com/" . esc_attr($RP['page']) . "/?". esc_attr($RP['api_key']) .":". esc_attr($RP['api_secret']);
 
-	return "<iframe style='width: 100%; height: 1000px; border: none; outline: none;' src='". $RP_Taplist_url ."' width='300' height='150'></iframe>";
-
+    //Returning the Results to DOM
+    return "<iframe style='width: 100%; height: 1000px; border: none; outline: none;' src='". esc_url($RP_Taplist_url) ."' width='300' height='150'></iframe>";
 }
+
 add_shortcode( 'RPints', 'validationCall' );
