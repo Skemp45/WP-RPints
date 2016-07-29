@@ -50,10 +50,10 @@ function WPRP_menu(){
 
 //Create Display Inside admin section
 function wprp_init(){
-  
+
   //Title Section
   echo "<h1>RaspberryPints Taplist Admin</h1>";
-
+ 
   //set navigation
   echo "<h2 class='nav-tab-wrapper'><a class='nav-tab nav-tab-active' id='api-tab' href='#top#api'>API Settings</a><a class='nav-tab nav-tab-disabled' id='other-tab' href='#top#other'>Other</a></h2>";
 
