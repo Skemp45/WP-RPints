@@ -90,9 +90,15 @@ function RPDB_insert_data($apiK, $apiS) {
   echo "<script>window.location.reload()</script>";
 }
 
+//Add settings link
+function WPRP_settings_link( $links ) {
+    $settings_link = '<a href="admin.php?page=wprp-admin">' . __( 'Settings' ) . '</a>';
+    array_unshift($links, $settings_link);
+  	return $links;
+}
+$plugin = plugin_basename( __FILE__ );
 
-//Install db settings on install
-register_activation_hook( __FILE__, 'RPDB_install' );
+add_filter( "plugin_action_links_$plugin", 'WPRP_settings_link' );
 
 
 /////////////////////////////////////////////////////////////
