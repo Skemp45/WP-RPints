@@ -27,13 +27,13 @@
 // Blocks direct access to plugin
 defined( 'ABSPATH' ) or die( "Access Forbidden" );
 
-// Define Second Street Plugin
+// Define WP RPints Plugin
 define( 'WPRPINTS_PLUGIN_VERSION', '1.0' );
 define( 'WPRPINTS_PLUGIN__MINIMUM_WP_VERSION', '4.5' );
 define( 'WPRPINTS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WPRPINTS_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 
-// [ss-promo] Code
+// [RPints] Code
 function validationCall( $creds, $content = null ) {
 	$RP = shortcode_creds( array (
 			'API_KEY' => '',
