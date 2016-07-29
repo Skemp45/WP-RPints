@@ -82,7 +82,7 @@ function validationCall( $creds, $content = null ) {
     //Building Validation URL
     $RP_Taplist_url = "http://raspberrypints.com/" . esc_attr($RP['page']) . "/?". esc_attr($RP['api_key']) .":". esc_attr($RP['api_secret']);
 
-    //Returning the Results to DOM
+    //Returning the Results to DOM this is TEMP while we plan how to validate 
     return "<iframe style='width: 100%; height: 1000px; border: none; outline: none;' src='". esc_url($RP_Taplist_url) ."' width='300' height='150'></iframe>";
 }
 
