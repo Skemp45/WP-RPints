@@ -6,7 +6,7 @@ Benefits
 - Easy shortcode inclusion
 
 
-callable by the use of shortcode.
+Callable by the use of shortcode.
 
 ```
 [RPints API_KEY="YOURKEY" API_Secret="YOURSECRET" Page="FOR TESTING BUT PAGE NAME"]
