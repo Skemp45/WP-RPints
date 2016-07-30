@@ -87,7 +87,8 @@ function RPDB_insert_data($apiK, $apiS) {
   }
 
   register_activation_hook( __FILE__, 'RPDB_insert_data' );
-  echo "<script>window.location.reload()</script>";
+  $redirecturl = get_site_url() . "/wp-admin/admin.php?page=wprp-admin";
+  echo $redirecturl;
 }
 
 //Add settings link
@@ -98,8 +99,11 @@ function WPRP_settings_link( $links ) {
 }
 $plugin = plugin_basename( __FILE__ );
 
+//call settings link
 add_filter( "plugin_action_links_$plugin", 'WPRP_settings_link' );
 
+//Install db on activate
+register_activation_hook( __FILE__, 'RPDB_install' );
 
 /////////////////////////////////////////////////////////////
 //           Start Admin Menu function section             //
@@ -134,11 +138,17 @@ function wprp_init(){
     $apiK = $_POST["apiKey"];
     $apiS = $_POST["apiSecret"];
     RPDB_insert_data($apiK, $apiS);
+    ?>
+    <div class="updated notice">
+        <p><?php _e( 'Your Settings have been updated!' ); ?></p>
+    </div>
+    <?php
 
   }
 
   //Title Section
   echo "<h1>RaspberryPints Taplist Admin</h1>";
+
 
   //set navigation
   echo "<h2 class='nav-tab-wrapper'><a class='nav-tab nav-tab-active' id='api-tab' href='#top#api'>API Settings</a><a class='nav-tab nav-tab-disabled' id='other-tab' href='#top#other'>Other</a></h2>";
@@ -155,7 +165,7 @@ function wprp_init(){
               <input type='text' name='apiKey' value='".$apiKey."'/><br/>
           <label><b>API Secret:</b></label><br/>
               <input type='text' name='apiSecret' value='".$apiSecret."'/><br/><br/>
-              <button class='button button-primary'>Submit</button>
+              <button id='myAlert' class='button button-primary close'>Submit</button>
           </form>
       </div>";
   echo "<div id='other'></div>";
