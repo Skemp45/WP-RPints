@@ -87,8 +87,25 @@ function RPDB_insert_data($apiK, $apiS) {
   }
 
   register_activation_hook( __FILE__, 'RPDB_insert_data' );
-  $redirecturl = get_site_url() . "/wp-admin/admin.php?page=wprp-admin";
-  echo $redirecturl;
+
+  do_action('showSuccess');
+  do_action('refreshChanges');
+}
+
+//create success message
+add_action( 'showSuccess', 'displaySuccess' );
+function displaySuccess() { 
+    ?>
+    <div class="notice notice-success is-dismissible">
+  	<p><strong>Settings saved.</strong></p>
+    </div>
+    <?php
+}
+
+//create ability to refresh after update
+add_action( 'refreshChanges', 'refreshPage' );
+function refreshPage() {
+    echo '<script>location.reload();</script>';
 }
 
 //Add settings link
@@ -138,12 +155,6 @@ function wprp_init(){
     $apiK = $_POST["apiKey"];
     $apiS = $_POST["apiSecret"];
     RPDB_insert_data($apiK, $apiS);
-    ?>
-    <div class="updated notice">
-        <p><?php _e( 'Your Settings have been updated!' ); ?></p>
-    </div>
-    <?php
-
   }
 
   //Title Section
