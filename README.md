@@ -12,5 +12,5 @@ Benefits
 Callable by the use of shortcode.
 
 ```
-[RPints api_key="YOURKEY" api_secret="YOURSECRET" page="FOR TESTING BUT PAGE NAME"]
+[RPints limit_beers="5"]
 ```
