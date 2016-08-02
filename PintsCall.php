@@ -36,15 +36,15 @@ defined( 'ABSPATH' ) or die( "Access Forbidden" );
 //              Database Related Functions                 //
 /////////////////////////////////////////////////////////////
 
-//Table Creation
+//Table creation
 function RPDB_install () {
    global $wpdb;
 
-   //define table name
+   //Define table name
    $table_name = $wpdb->prefix . "raspberrypints";
    $charset_collate = $wpdb->get_charset_collate();
 
-   //sql statement to create table
+   //SQL statement to create table
    $sql = "CREATE TABLE $table_name (
       id int(255) NOT NULL AUTO_INCREMENT,
       api_key varchar(255) NOT NULL,
@@ -57,7 +57,7 @@ function RPDB_install () {
 }
 
 
-// //insert data into Table
+////Insert data into Table
 function RPDB_insert_data($apiK, $apiS) {
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'raspberrypints';
@@ -92,7 +92,7 @@ function RPDB_insert_data($apiK, $apiS) {
   do_action('refreshChanges');
 }
 
-//create success message
+//Create success message
 add_action( 'showSuccess', 'displaySuccess' );
 function displaySuccess() {
     ?>
@@ -102,7 +102,7 @@ function displaySuccess() {
     <?php
 }
 
-//create ability to refresh after update
+//Create ability to refresh after update
 add_action( 'refreshChanges', 'refreshPage' );
 function refreshPage() {
     echo '<script>location.reload();</script>';
@@ -116,7 +116,7 @@ function WPRP_settings_link( $links ) {
 }
 $plugin = plugin_basename( __FILE__ );
 
-//call settings link
+//Call settings link
 add_filter( "plugin_action_links_$plugin", 'WPRP_settings_link' );
 
 //Install db on activate
@@ -125,12 +125,12 @@ register_activation_hook( __FILE__, 'RPDB_install' );
 /////////////////////////////////////////////////////////////
 //           Start Admin Menu function section             //
 /////////////////////////////////////////////////////////////
-//Build out Admin UI
+//Build out admin UI
 add_action('admin_menu', 'WPRP_menu');
 
  // add_menu_page( string $page_title, string $menu_title, string $capability, string $menu_slug, callable $function = '', string $icon_url = '', int $position = null
 
-//Set Menu Settings
+//Set menu settings
 function WPRP_menu(){
         add_menu_page(
             'WP RPints Admin Page',
@@ -141,7 +141,7 @@ function WPRP_menu(){
             'dashicons-editor-table' );
 }
 
-//Create Display Inside admin section
+//Create display inside admin section
 function wprp_init(){
   global $wpdb;
 
@@ -157,14 +157,14 @@ function wprp_init(){
     RPDB_insert_data($apiK, $apiS);
   }
 
-  //Title Section
+  //Title section
   echo "<h1>RaspberryPints Taplist Admin</h1>";
 
 
-  //set navigation
+  //Set navigation
   echo "<h2 class='nav-tab-wrapper'><a class='nav-tab nav-tab-active' id='api-tab' href='#top#api'>API Settings</a><a class='nav-tab nav-tab-disabled' id='other-tab' href='#top#other'>Other</a></h2>";
 
-  //Page Description
+  //Page description
   echo "<p style='font-size:120%; width:60%;'>
   This is where you will need to set your API Key and Secrect so that when you implement the short code into your website it can make the proper API calls in order to display your active Taplist.
   </p>";
@@ -195,10 +195,10 @@ function validationCall( $creds, $content = null ) {
 			'page' => ''
 		), $creds );
 
-    //Building Validation URL
+    //Building validation URL
     $RP_Taplist_url = "http://raspberrypints.com/" . esc_attr($RP['page']) . "/?". esc_attr($RP['api_key']) .":". esc_attr($RP['api_secret']);
 
-    //Returning the Results to DOM this is TEMP while we plan how to validate
+    //Returning the results to DOM this is TEMP while we plan how to validate
     return "<iframe style='width: 100%; height: 1000px; border: none; outline: none;' src='". esc_url($RP_Taplist_url) ."' width='300' height='150'></iframe>";
 }
 
