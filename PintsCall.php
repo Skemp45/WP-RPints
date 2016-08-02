@@ -57,7 +57,7 @@ function RPDB_install () {
 }
 
 
-////Insert data into Table
+////Insert data into table
 function RPDB_insert_data($apiK, $apiS) {
 	global $wpdb;
 	$table_name = $wpdb->prefix . 'raspberrypints';
