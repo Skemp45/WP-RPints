@@ -94,7 +94,7 @@ function RPDB_insert_data($apiK, $apiS) {
 
 //create success message
 add_action( 'showSuccess', 'displaySuccess' );
-function displaySuccess() { 
+function displaySuccess() {
     ?>
     <div class="notice notice-success is-dismissible">
   	<p><strong>Settings saved.</strong></p>
@@ -171,12 +171,12 @@ function wprp_init(){
 
   //Content divs
   echo "<div id='api'>
-          <form action='' method='POST'>
+          <form action='' id='PintsUpdate' method='POST'>
           <label><b>API Key:</b></label><br/>
               <input type='text' name='apiKey' value='".$apiKey."'/><br/>
           <label><b>API Secret:</b></label><br/>
               <input type='text' name='apiSecret' value='".$apiSecret."'/><br/><br/>
-              <button id='myAlert' class='button button-primary close'>Submit</button>
+              <button id='keyupdate' class='button button-primary close'>Submit</button>
           </form>
       </div>";
   echo "<div id='other'></div>";
